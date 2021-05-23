@@ -3,6 +3,10 @@
 #include <locale.h>
 #include <ctype.h>
 #include<stdlib.h>
+//Marmara Üniversitesi Teknoloji Fakültesi Bilgisayar Mühendisliði
+//Ahmet Faruk Alkan     :170420044
+//Mustafa Eren Gülbahar :170420019
+//Ýsmail Can Varlý      :171420004
 //c olarak çalýþtýr
 struct konut {
 
@@ -74,16 +78,15 @@ int main () {
 	}
 	if(secim==3){
 		konutgoruntule(secim);
-		printf("Kac numarali konutu silmek istiyorsunuz ? \nSecim : ");
+		printf("Kac numarali konutu silmek istiyorsunuz ?(Geri donmek icin 0 giriniz)\nSecim : ");
 	    scanf("%d",&silno);
 	   	while(!(silno<=500)||!(silno>=0)){
 			printf("!!HATA!!\n");
 			printf("Kac numarali konutu sileceksiniz ? \nSecim : ");
 			scanf("%d",&silno);
+			if(silno==0)
+				break;
     	 }
-	    
-	    
-	    	
 		kon[silno-1]=sil();
 			
 		getch();
@@ -122,10 +125,13 @@ void konutgoruntule(int secim){
 	system("COLOR e1");
 
 
-
+    if(!strcmp(kon[0].ilbilgisi,"\0"))   
+		printf("\t\t<<Kayit bulunamadi>>\n");
+	else{
 	printf("No\tm^2\tKat\tFiyat\t     Konut Durumu\tArsa Bilgisi   Il/Ilce\t\t Oda Sayisi\n");
 	for(i=0;i<500;i++){
-	    if(strcmp(kon[i].ilbilgisi,"\0")){
+		
+         if(strcmp(kon[i].ilbilgisi,"\0")){
 	    	printf("%d\t",i+1);
 			printf("%d\t",kon[i].konutalani);
 			printf("%d\t",kon[i].konutkat);
@@ -137,8 +143,10 @@ void konutgoruntule(int secim){
 			printf("%s\n",kon[i].odasayisi);
 
 		}
-	fclose(dosya);
+
 	}
+	}
+
 	if(secim!=3){
 		getch();
 		system("CLS");
@@ -240,13 +248,13 @@ void guncelle(){
 	system("CLS");
 	int i;
 	konutgoruntule(3);
-	printf("Kac numarali konutu güncelleyeceksin : ");
+	printf("Kac numarali konutu güncelleyeceksin(Geri donmek icin 0 giriniz) : ");
 	scanf("%d",&i);
-	while(!(i<=500)||!(i>=1)){
+	while(!(i<=500)||!(i>=0)){
 	printf("!!HATA!!\n");
 	printf("Kac numarali konutu güncelleyeceksin ? \nSecim : ");
-	scanf("%d",&i);
-    }
+	scanf("%d",&i);}
+	if(i!=0){	
 
 	printf("\n----------------------------------------------\n");
 	printf("\tKonut alani(m²) : ");
@@ -268,6 +276,9 @@ void guncelle(){
 	printf("\tKonut oda bilgisi(Oda+salon) : ");
 	gets(kon[i-1].odasayisi);
 	printf("\n----------------------------------------------\n");
+	}
+			
+    
 	getch();
 	system("CLS");
 }
@@ -286,7 +297,7 @@ void txtoku(){
 
 	}
 	else{
-		printf("\n\n\nDosya Bulunamadi");
+		printf("\t\t\t  <<Dosya Bulunamadi>>");
 	}
 	fclose(dosya);
 
@@ -311,31 +322,26 @@ void txtyaz(){
 		}
 
 	}fclose(dosya);
-
-
-
 }
 void filtre(){
 	int secim;
 	system("COLOR f2");
-
-
 	system("CLS");
 	do{
-	printf("\t\t<><><><><><><><><><><><><><><><><><><><><><><\n");
-	printf("\t\t**  Coklu filtreleme icin           : 1    **\n");
-	printf("\t\t**  Fiyat filterelemesi icin        : 2    **\n");
-	printf("\t\t**  Kat bilgisi filtrelemesi icin   : 3    **\n");
-	printf("\t\t**  m² bilgisi filtrelemesi icin    : 4    **\n");
-	printf("\t\t**  Arsa durumu filtrelemsi icin    : 5    **\n");
-	printf("\t\t**  Arsa bilgisi filtrelemsi icin   : 6    **\n");
-	printf("\t\t**  Konum bilgisi filtrelemsi icin  : 7    **\n");
-	printf("\t\t**  Oda sayisi filtrelemsi icin     : 8    **\n");
-	printf("\t\t**  Cikis yapmak icin               : 0    **\n");
-	printf("\t\t**  -------------------------------------  **\n");
+	printf("\t\t<><><><><><><><><><><><><><><><><><><><><><><><><><><><><\n");
+	printf("\t\t**  Coklu filtreleme icin                       : 1    **\n");
+	printf("\t\t**  Fiyat filterelemesi icin                    : 2    **\n");
+	printf("\t\t**  Kat bilgisi filtrelemesi icin               : 3    **\n");
+	printf("\t\t**  m² bilgisi filtrelemesi icin                : 4    **\n");
+	printf("\t\t**  Arsa durumu filtrelemsi icin (Satilik-Kira) : 5    **\n");
+	printf("\t\t**  Arsa bilgisi filtrelemsi icin               : 6    **\n");
+	printf("\t\t**  Konum bilgisi filtrelemsi icin              : 7    **\n");
+	printf("\t\t**  Oda sayisi filtrelemsi icin                 : 8    **\n");
+	printf("\t\t**  Cikis yapmak icin                           : 0    **\n");
+	printf("\t\t**  -------------------------------------------------  **\n");
 	printf("\t\t    Seciminiz : ")	;
     scanf("%d",&secim);
-	printf("\t\t<><><><><><><><><><><><><><><><><><><><><><><\n\n\n");
+	printf("\t\t<><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n\n\n");
 
 	if(secim==1){
 		cokfiltreleme();
@@ -476,7 +482,10 @@ void fiyatfiltre(){
             scanf("%d",&minimum);
             printf("Maksimum fiyat : ");
             scanf("%d",&maksimum);
-            
+            while(maksimum<minimum){
+            	printf("!!Hata!!\nMaksimum fiyat : ");
+            	scanf("%d",&maksimum);
+			}
             printf("No\tm^2\tKat\tFiyat\t     Konut Durumu\tArsa Bilgisi   Il/Ilce\t\t Oda Sayisi\n");
 
             for(i=0;i<500;i++)
@@ -608,9 +617,13 @@ void katfiltre(){
             scanf("%d",&minimum);
             printf("Maksimum kat sayisi : ");
             scanf("%d",&maksimum);
+            while(maksimum<minimum){
+            	printf("!!Hata!!\nMaksimum kat : ");
+            	scanf("%d",&maksimum);
+			}            
             printf("No\tm^2\tKat\tFiyat\t     Konut Durumu\tArsa Bilgisi   Il/Ilce\t\t Oda Sayisi\n");
 
-            for(i=0;i<5;i++)
+            for(i=0;i<500;i++)
                 {
                     if(strcmp(kon[i].ilbilgisi,"\0") && (kon[i].konutkat>=minimum && kon[i].konutkat<=maksimum))
                     {
@@ -730,14 +743,18 @@ void mkarefiltre(){
 		}
 		if(secim==3){
 
-                printf("\nEvin metre kare araligi ne olsun ?");
+            printf("\nEvin metre kare araligi ne olsun ?");
             printf("\nMinimum alan : ");
             scanf("%d",&minimum);
             printf("Maksimum alan : ");
             scanf("%d",&maksimum);
-            printf("No\tm^2\tKat\tFiyat\t     Konut Durumu\tArsa Bilgisi   Il/Ilce\t\t Oda Sayisi\n");
+            while(maksimum<minimum){
+            	printf("!!Hata!!\nMaksimum alan : ");
+            	scanf("%d",&maksimum);
+			}            
+			printf("No\tm^2\tKat\tFiyat\t     Konut Durumu\tArsa Bilgisi   Il/Ilce\t\t Oda Sayisi\n");
 
-            for(i=0;i<5;i++)
+            for(i=0;i<500;i++)
                 {
                     if(strcmp(kon[i].ilbilgisi,"\0") && (kon[i].konutalani>=minimum && kon[i].konutalani<=maksimum))
                     {
@@ -982,7 +999,7 @@ void odasayfiltre(){
 }
 void cokfiltreleme(){
 	system("CLS");
-	int i,j,*secim,minimumkat,maksimumkat,minimumfiy,maksimumfiy,minimumm2,maksimumm2,dolu=0,dizi[500];
+	int i,j,k,*secim,minimumkat,maksimumkat,minimumfiy,maksimumfiy,minimumm2,maksimumm2,dolu=0,dizi[500],l;
 	char arsadurum[11],arsabil[10],il[15],ilce[15],oda[8];
 	printf("\t\t   !!!Turkce Karakter Kullanmayiniz!!!\n");
 	printf("\t\t<><><><><><><><><><><><><><><><><><><><><><><\n");
@@ -994,60 +1011,80 @@ void cokfiltreleme(){
 	printf("\t\t**  Konum bilgisi filtrelemsi icin  : 6    **\n");
 	printf("\t\t**  Oda sayisi filtrelemsi icin     : 7    **\n");
 	printf("\t\t**  -------------------------------------  **\n");
-	printf("Secimlerinizi girdikten sonra secim olarak 0 giriniz.\n");
+	printf("\n\t\tSecimlerinizi girdikten sonra secim olarak 0 giriniz.\n");
 	
 	secim=(int*)malloc(sizeof(int)*7);
 	
-	for(i=0;i<7;i++){
-		printf("Seciminiz : ");
-		scanf("%d",&secim[i]);
-		if(secim[i]==0)
+	for(k=0;k<7;k++){
+		printf("\t\tSeciminiz : ");
+		scanf("%d",&secim[k]);
+		while(secim[k]>7||secim[k]<0){
+			printf("\t\t!!HATA!!\n\t\tSeciminiz : ");
+			scanf("%d",&secim[k]);
+		}
+		for(l=0;l<k;l++){
+			while(secim[k]==secim[l]){
+				printf("\t\tBu secimi daha önce yaptiniz\n\t\tSeciminiz : ");
+				scanf("%d",&secim[k]);
+				l=0;
+			}
+		}
+		if(secim[k]==0)
 			break;	
 	}
-	
-	secim=(int*)realloc(secim,i*sizeof(int));
+	if(secim[0]!=0){
+	secim=(int*)realloc(secim,k*sizeof(int*));
 	for(j=0;j<8;j++){
 		if(secim[j]==1){
-			printf("\nKonut fiyat araligi ne olsun ?");
-            printf("\nMinimum fiyat : ");
+			printf("\n\t\tKonut fiyat araligi ne olsun ?");
+            printf("\n\t\tMinimum fiyat : ");
             scanf("%d",&minimumfiy);
-            printf("Maksimum fiyat sayisi : ");
+            printf("\t\tMaksimum fiyat sayisi : ");
             scanf("%d",&maksimumfiy);
+            while(maksimumfiy<minimumfiy){
+            	printf("\t\t!!Hata!!\n\t\tMaksimum fiyat : ");
+            	scanf("%d",&maksimumfiy);
+			}            
 		}
 		if(secim[j]==2){
-			printf("\nKonut kat araligi ne olsun ?");
-            printf("\nMinimum kat sayisi : ");
+			printf("\n\t\tKonut kat araligi ne olsun ?");
+            printf("\n\t\tMinimum kat sayisi : ");
             scanf("%d",&minimumkat);
-            printf("Maksimum kat sayisi : ");
+            printf("\t\tMaksimum kat sayisi : ");
             scanf("%d",&maksimumkat);
+            while(maksimumkat<minimumkat){
+            	printf("\t\t!!Hata!!\n\t\tMaksimum kat : ");
+            	scanf("%d",&maksimumkat);
+			}            
 		}
 		if(secim[j]==3){
-			printf("\nKonut m² araligi ne olsun ?");
-            printf("\nMinimum m² : ");
+			printf("\n\t\tKonut m² araligi ne olsun ?");
+            printf("\n\t\tMinimum m² : ");
             scanf("%d",&minimumm2);
-            printf("Maksimum m² : ");
+            printf("\t\tMaksimum m² : ");
             scanf("%d",&maksimumm2);
+            while(maksimumm2<minimumm2){
+            	printf("\t\t!!Hata!!\n\t\tMaksimum m² : ");
+            	scanf("%d",&maksimumm2);
+			}            
 		}
 		if(secim[j]==4){
-			printf("\nKonut arsa durumu giriniz(Satilik/Kira) : ");
+			printf("\n\t\tKonut arsa durumu giriniz(Satilik/Kira) : ");
       		getchar();
 			gets(arsadurum);	
 		}
 		if(secim[j]==5){
-			printf("\nKonut arsa bilgisini giriniz(Apartman/Dukkan/Mustakil) : ");
-			getchar();
+			printf("\n\t\tKonut arsa bilgisini giriniz(Apartman/Dukkan/Mustakil) : ");
       		gets(arsabil);
 		}
 		if(secim[j]==6){
-			printf("\nÝl bilgisini giriniz : ");
-			getchar();
+			printf("\n\t\tÝl bilgisini giriniz : ");
       		gets(il);
-      		printf("Ýlçe bilgisini giriniz : ");
+      		printf("\t\tÝlçe bilgisini giriniz : ");
       		gets(ilce);
 		}
 		if(secim[j]==7){
-			printf("\nKonut oda sayisini giriniz(Oda Sayisi+Salon Sayisi): ");
-			getchar();
+			printf("\n\t\tKonut oda sayisini giriniz(Oda Sayisi+Salon Sayisi): ");
 			gets(oda);
 		}
 		
@@ -1058,7 +1095,7 @@ void cokfiltreleme(){
 		dolu++;
 	}
 	for(i=0;i<dolu;i++){
-		for(j=0;j<8;j++){
+		for(j=0;j<k;j++){
 			if(secim[j]==1&&!(minimumfiy<=kon[i].konutfiyat&&maksimumfiy>=kon[i].konutfiyat)){
 				dizi[i]=-1;
 			}
@@ -1068,13 +1105,13 @@ void cokfiltreleme(){
 			if(secim[j]==3&&!(minimumm2<=kon[i].konutalani&&maksimumm2>=kon[i].konutalani)){
 				dizi[i]=-1;
 			}
-			if(secim[j]==4&&(strcmp(arsadurum,kon[i].konutdurum)&&strcmp(strupr(arsadurum),kon[i].konutdurum))){
+			if(secim[j]==4&&(strcmp(strupr(arsadurum),kon[i].konutdurum))){
 				dizi[i]=-1;
 			}
-			if(secim[j]==5&&(strcmp(arsabil,kon[i].arsabilgisi)&&strcmp(strupr(arsabil),kon[i].arsabilgisi))){
+			if(secim[j]==5&&(strcmp(strupr(arsabil),kon[i].arsabilgisi))){
 				dizi[i]=-1;
 			}
-			if(secim[j]==6&&strcmp(il,kon[i].ilbilgisi)&&strcmp(strupr(il),kon[i].ilbilgisi)&&strcmp(ilce,kon[i].ilcebilgisi)&&strcmp(strupr(ilce),kon[i].ilcebilgisi)){
+			if(secim[j]==6&&(strcmp(strupr(il),kon[i].ilbilgisi)&&strcmp(strupr(ilce),kon[i].ilcebilgisi))){
 				dizi[i]=-1;
 			}
 			if(secim[j]==7&&strcmp(oda,kon[i].odasayisi)){
@@ -1082,7 +1119,7 @@ void cokfiltreleme(){
 			}
 		}
 	}
-	printf("No\tm^2\tKat\tFiyat\t     Konut Durumu\tArsa Bilgisi   Il/Ilce\t\t Oda Sayisi\n");
+	printf("\nNo\tm^2\tKat\tFiyat\t     Konut Durumu\tArsa Bilgisi   Il/Ilce\t\t Oda Sayisi\n");
 	for(i=0;i<500;i++)
        {
         	if(strcmp(kon[i].ilbilgisi,"\0") && dizi[i]!=-1)
@@ -1097,7 +1134,10 @@ void cokfiltreleme(){
 				printf("%s\t  ",kon[i].ilcebilgisi);
 				printf("%s\n",kon[i].odasayisi);
                 }
-        }
+        }		
+	}
+	
+
 	free(secim);
 	getch();
 	system("CLS");
