@@ -998,6 +998,7 @@ void odasayfiltre(){
 	system("CLS");
 }
 void cokfiltreleme(){
+	
 	system("CLS");
 	int i,j,k,*secim,minimumkat,maksimumkat,minimumfiy,maksimumfiy,minimumm2,maksimumm2,dolu=0,dizi[500],l;
 	char arsadurum[11],arsabil[10],il[15],ilce[15],oda[8];
@@ -1034,7 +1035,9 @@ void cokfiltreleme(){
 	}
 	if(secim[0]!=0){
 	secim=(int*)realloc(secim,k*sizeof(int*));
+	
 	for(j=0;j<8;j++){
+		
 		if(secim[j]==1){
 			printf("\n\t\tKonut fiyat araligi ne olsun ?");
             printf("\n\t\tMinimum fiyat : ");
@@ -1068,24 +1071,24 @@ void cokfiltreleme(){
             	scanf("%d",&maksimumm2);
 			}            
 		}
+	
 		if(secim[j]==4){
 			printf("\n\t\tKonut arsa durumu giriniz(Satilik/Kira) : ");
-      		getchar();
-			gets(arsadurum);	
+			scanf("%s",arsadurum);	
 		}
 		if(secim[j]==5){
 			printf("\n\t\tKonut arsa bilgisini giriniz(Apartman/Dukkan/Mustakil) : ");
-      		gets(arsabil);
+      		scanf("%s",arsabil);
 		}
 		if(secim[j]==6){
 			printf("\n\t\tÝl bilgisini giriniz : ");
-      		gets(il);
+      		scanf("%s",il);
       		printf("\t\tÝlçe bilgisini giriniz : ");
-      		gets(ilce);
+      		scanf("%s",ilce);
 		}
 		if(secim[j]==7){
 			printf("\n\t\tKonut oda sayisini giriniz(Oda Sayisi+Salon Sayisi): ");
-			gets(oda);
+			scanf("%s",oda);
 		}
 		
 	}
